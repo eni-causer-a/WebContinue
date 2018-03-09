@@ -20,7 +20,7 @@ jobs:
       - checkout
       - run: npm install express
       - run: npm install cookie-session
-      - run: ls
+      - run: npm install ejs
       - run: node app.js
 
       # Download and cache dependencies

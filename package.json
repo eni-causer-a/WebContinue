@@ -1,9 +1,10 @@
 {
   "name": "webcontinue",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "dependencies": {
+    "cookie-session": "^2.0.0-beta.3",
+    "ejs": "^2.5.7",
     "express": "^4.16.2"
   },
   "devDependencies": {},
@@ -19,5 +20,6 @@
   "bugs": {
     "url": "https://github.com/epsi-causer-a/WebContinue/issues"
   },
-  "homepage": "https://github.com/epsi-causer-a/WebContinue#readme"
+  "homepage": "https://github.com/epsi-causer-a/WebContinue#readme",
+  "description": ""
 }
