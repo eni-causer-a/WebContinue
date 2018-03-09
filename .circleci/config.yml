@@ -20,7 +20,7 @@ jobs:
       - checkout
       - run: npm install express
       - run: pwd
-      -run: ls
+      - run: ls
       - run: node app.js
 
       # Download and cache dependencies
