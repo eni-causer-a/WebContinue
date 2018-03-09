@@ -19,7 +19,7 @@ jobs:
     steps:
       - checkout
       - run: npm install express
-      - run: pwd
+      - run: npm install cookie-session
       - run: ls
       - run: node app.js
 
