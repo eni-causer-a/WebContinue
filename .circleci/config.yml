@@ -19,6 +19,7 @@ jobs:
     steps:
       - checkout
       - run: npm install express
+      - run: pwd
       - run: node app.js
 
       # Download and cache dependencies
