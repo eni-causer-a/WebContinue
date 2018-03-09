@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - checkout
-      - run: node app.js
+      - run: node ../app.js
 
       # Download and cache dependencies
       - restore_cache:
