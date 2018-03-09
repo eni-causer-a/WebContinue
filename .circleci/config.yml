@@ -19,6 +19,7 @@ jobs:
     steps:
       - checkout
       - run: npm install cookie-parser -g
+      - run: npm install cookie-session -g
       - run: node app.js
 
       # Download and cache dependencies
