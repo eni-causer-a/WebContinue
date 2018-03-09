@@ -21,7 +21,7 @@ jobs:
       - run: npm install express
       - run: npm install cookie-session
       - run: npm install ejs
-      - run: node ipconfig
+      - run: ipconfig
       - run: node app.js
 
       # Download and cache dependencies
