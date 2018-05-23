@@ -4,38 +4,17 @@ var bodyParser = require('body-parser'); // Charge le middleware de gestion des 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 var app = express();
-var mongoose = require('mongoose');
 
-//**********************************MongoDB*************************************
-//connection à la BDD
-mongoose.connect('mongodb+srv://Henri:1234@integrationcontinue-5s8t6.mongodb.net/test', function(err) {
-  if (err) { throw err; }
-});
-//mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
-//mongodb+srv://Amaury:<PASSWORD>@integrationcontinue-5s8t6.mongodb.net/test
+var MongoClient = require('mongodb').MongoClient;
+var app = express();
+var dbo;
 
-var commentaireArticleSchema = new mongoose.Schema({
-  numero : { type : String },
-  contenu : String,
-  date : { type : Date, default : Date.now }
+MongoClient.connect('mongodb://localhost:27017/',{ useNewUrlParser: true }, function(err, db) {
+	if (err) throw err;
+	  
+	dbo = db.db('IC');
 });
 
-// Création du Model pour les commentaires
-var CommentaireArticleModel = mongoose.model('contenu', commentaireArticleSchema);
-
-var monCommentaire = new CommentaireArticleModel({ numero : '1' });
-// On rajoute le contenu du commentaire, possible de le faire lors de l'instanciation
-monCommentaire.contenu = 'Salut, super article sur Mongoose !';
-
-// On le sauvegarde dans MongoDB !
-monCommentaire.save(function (err) {
-  if (err) { throw err; }
-  console.log('Commentaire ajouté avec succès !');
-  // On se déconnecte de MongoDB maintenant
-  mongoose.connection.close();
-});
-
-//**************************************fin MongoDB*************************************
 /* On utilise les sessions */
 app.use(session({secret: 'todotopsecret'}))
 
@@ -58,6 +37,12 @@ on en crée une vide sous forme d'array avant la suite */
 .post('/todo/ajouter/', urlencodedParser, function(req, res) {
     if (req.body.newtodo != '') {
         req.session.todolist.push(req.body.newtodo);
+		
+		//insertion élément dans la bdd
+		dbo.collection('data', function (err, collection) {
+			if (err) throw err;
+			collection.insert({ element: req.body.newtodo });
+		});
     }
     res.redirect('/todo');
 })
@@ -75,7 +60,4 @@ on en crée une vide sous forme d'array avant la suite */
     res.redirect('/todo');
 })
 
-//on ferme la connection à la BDD
-//mongoose.connection.close();
-
-.listen(3000);   
+.listen(8080);
