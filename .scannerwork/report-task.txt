@@ -1,0 +1,7 @@
+organization=henriepsi-github
+projectKey=epsiic
+serverUrl=https://sonarcloud.io
+serverVersion=7.2.0.12086
+dashboardUrl=https://sonarcloud.io/dashboard/index/epsiic
+ceTaskId=AWOQ5L8lNPlZRTBE7hlo
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWOQ5L8lNPlZRTBE7hlo
